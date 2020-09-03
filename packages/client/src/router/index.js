@@ -14,6 +14,10 @@ const loginGuard = async (to, from, next) => {
     return next({ name: 'Login' });
   }
 
+  if (to.name === 'Login' && isUserLoggedIn) {
+    return next({ name: 'Home' });
+  }
+
   next();
 };
 
