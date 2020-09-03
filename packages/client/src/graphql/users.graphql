@@ -1,0 +1,7 @@
+query GetUsers($page: Int!) {
+    users(page: $page){
+        first_name
+        email
+        last_name
+    }
+}
