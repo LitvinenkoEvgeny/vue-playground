@@ -1,26 +1,29 @@
 <template>
-    <div>
-        <b-form @submit="checkForm">
-            <b-form-group>
-                <b-form-input v-model="login" type="text" required>
-                </b-form-input>
-            </b-form-group>
+        <b-row>
+            <b-col align-self="center">
+                <b-form @submit="checkForm">
+                    <b-form-group label="Login">
+                        <b-form-input v-model="login" type="text" required>
+                        </b-form-input>
+                    </b-form-group>
 
-            <b-form-group>
-                <b-form-input v-model="password" type="password" required>
-                </b-form-input>
-            </b-form-group>
+                    <b-form-group label="Password">
+                        <b-form-input v-model="password" type="password" required>
+                        </b-form-input>
+                    </b-form-group>
 
-            <b-button type="submit" variant="primary">Submit</b-button>
-        </b-form>
-        <ul v-if="errors.length">
-            <li v-for="error in errors" :key="error">{{error}}</li>
-        </ul>
-    </div>
+                    <b-button type="submit" variant="primary">Submit</b-button>
+                </b-form>
+                <ul v-if="errors.length">
+                    <li v-for="error in errors" :key="error">{{error}}</li>
+                </ul>
+            </b-col>
+        </b-row>
 </template>
 
 <script>
   import LOGIN_MUTATION from '../graphql/login.graphql';
+  import { onLogin } from '../vue-apollo';
 
   export default {
     data() {
@@ -49,7 +52,7 @@
       },
 
       async handleLogin() {
-        const data = await this.$apollo.mutate({
+        const { data: { login: { token } } } = await this.$apollo.mutate({
           mutation: LOGIN_MUTATION,
           variables: {
             loginInput: {
@@ -59,7 +62,9 @@
           },
         });
 
-        console.log(data);
+        if(token) {
+          onLogin(this.$apollo, token);
+        }
       },
     },
   };
