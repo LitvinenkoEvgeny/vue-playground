@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { GraphQLModule } from '@nestjs/graphql';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -10,8 +11,10 @@ import { GraphQLModule } from '@nestjs/graphql';
       debug: false,
       autoSchemaFile: true,
       playground: true,
+      context: ({ req }) => ({ headers: req.headers }),
     }),
-    UsersModule],
+    UsersModule,
+    AuthModule],
   controllers: [AppController],
   providers: [AppService],
 })
