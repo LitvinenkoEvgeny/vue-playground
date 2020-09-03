@@ -9,7 +9,6 @@ export class UsersResolver {
   constructor(private usersService: UsersService) {
   }
 
-
   @Query(returns => [User])
   async users(@Args('page', { type: () => Number }) page: number) {
     return this.usersService.getAllUsers(page);
