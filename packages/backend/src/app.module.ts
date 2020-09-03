@@ -1,4 +1,6 @@
+import * as path from 'path';
 import { Module } from '@nestjs/common';
+
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
@@ -9,7 +11,8 @@ import { AuthModule } from './auth/auth.module';
   imports: [
     GraphQLModule.forRoot({
       debug: false,
-      autoSchemaFile: true,
+      autoSchemaFile: path.join(process.cwd(), 'schema.graphql'),
+      sortSchema: true,
       playground: true,
       context: ({ req }) => ({ headers: req.headers }),
     }),
