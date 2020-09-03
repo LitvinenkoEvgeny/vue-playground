@@ -18,11 +18,14 @@ export class UsersService {
   public async createUser(createUserPayload: CreateUserInput) {
     const response = await (fetch('https://reqres.in/api/users/', {
       method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify(createUserPayload),
     }));
 
     if (response.status === 201) {
-      return true;
+      return response.json();
     } else {
       throw new Error('Error while adding user');
     }

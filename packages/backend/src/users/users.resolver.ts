@@ -1,6 +1,6 @@
 import { Query, Resolver, Args, Mutation, Int } from '@nestjs/graphql';
 
-import { CreateUserInput, User } from './users.model';
+import { CreatedUser, CreateUserInput, User } from './users.model';
 import { UsersService } from './users.service.js';
 import { UseGuards } from '@nestjs/common';
 import { AuthGuard } from '../auth/auth.guard';
@@ -24,7 +24,7 @@ export class UsersResolver {
   }
 
   @UseGuards(AuthGuard)
-  @Mutation(returns => Boolean)
+  @Mutation(returns => CreatedUser)
   async createUser(@Args('userData') userData: CreateUserInput) {
     return this.usersService.createUser(userData);
   }

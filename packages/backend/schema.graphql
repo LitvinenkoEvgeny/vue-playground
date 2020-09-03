@@ -2,6 +2,13 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type CreatedUser {
+  createdAt: String!
+  id: ID!
+  job: String!
+  name: String!
+}
+
 input CreateUserInput {
   job: String!
   name: String!
@@ -13,7 +20,7 @@ input LoginInput {
 }
 
 type Mutation {
-  createUser(userData: CreateUserInput!): Boolean!
+  createUser(userData: CreateUserInput!): CreatedUser!
   login(userData: LoginInput!): Token!
 }
 
