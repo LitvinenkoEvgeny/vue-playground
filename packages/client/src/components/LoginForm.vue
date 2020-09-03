@@ -1,21 +1,18 @@
 <template>
     <div>
-        <form
-                @submit="checkForm"
-        >
+        <b-form @submit="checkForm">
+            <b-form-group>
+                <b-form-input v-model="login" type="text" required>
+                </b-form-input>
+            </b-form-group>
 
-            <label>
-                Login: <input type="text" v-model="login">
-            </label>
+            <b-form-group>
+                <b-form-input v-model="password" type="password" required>
+                </b-form-input>
+            </b-form-group>
 
-            <label>
-                Password: <input type="text" v-model="password">
-            </label>
-
-            <button type="submit">Submit</button>
-
-        </form>
-
+            <b-button type="submit" variant="primary">Submit</b-button>
+        </b-form>
         <ul v-if="errors.length">
             <li v-for="error in errors" :key="error">{{error}}</li>
         </ul>
