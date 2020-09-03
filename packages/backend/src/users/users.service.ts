@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import fetch from 'node-fetch';
 
-import { CreateUserDTO } from './DTO/users.dto';
 import { CreateUserInput } from './users.model';
 
 @Injectable()
@@ -21,7 +20,7 @@ export class UsersService {
       method: 'post',
       body: JSON.stringify(createUserPayload),
     }));
-    console.log(response.status);
+
     if (response.status === 201) {
       return true;
     } else {
