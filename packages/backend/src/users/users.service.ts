@@ -1,7 +1,7 @@
 import { HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import fetch from 'node-fetch';
 
-import { CreateUserInput, Users } from './users.model';
+import { CreatedUser, CreateUserInput, Users } from './users.model';
 
 @Injectable()
 export class UsersService {
@@ -20,7 +20,7 @@ export class UsersService {
     return user.data;
   }
 
-  public async createUser(createUserPayload: CreateUserInput) {
+  public async createUser(createUserPayload: CreateUserInput): Promise<CreatedUser> {
     const response = await (fetch('https://reqres.in/api/users/', {
       method: 'post',
       headers: {
@@ -30,7 +30,12 @@ export class UsersService {
     }));
 
     if (response.status === 201) {
-      return response.json();
+      const createdUser = await response.json();
+
+      return {
+        ...createdUser,
+        ...createUserPayload
+      }
     } else {
       throw new Error('Error while adding user');
     }

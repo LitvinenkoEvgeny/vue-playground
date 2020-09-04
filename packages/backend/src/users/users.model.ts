@@ -27,29 +27,41 @@ export class User {
   last_name: string;
 
   @Field(type => String)
-  avatar: string
+  avatar: string;
 }
 
 @ObjectType()
 export class CreatedUser {
-  @Field(type => String)
-  name: string;
-
-  @Field(type => String)
-  job: string;
-
   @Field(type => ID)
   id: number;
 
-  @Field(type => String)
+  @Field(type => String, { nullable: true })
   createdAt: string;
+
+  @Field(type => String, { nullable: true })
+  email?: string;
+
+  @Field(type => String, { nullable: true })
+  first_name?: string;
+
+  @Field(type => String, { nullable: true })
+  last_name?: string;
+
+  @Field(type => String, { nullable: true })
+  avatar?: string;
 }
 
 @InputType()
 export class CreateUserInput {
-  @Field()
-  name: string;
+  @Field({ nullable: true })
+  name?: string;
 
-  @Field()
-  job: string;
+  @Field({ nullable: true })
+  first_name?: string;
+
+  @Field({ nullable: true })
+  last_name?: string;
+
+  @Field({ nullable: true })
+  email?: string;
 }
