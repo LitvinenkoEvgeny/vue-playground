@@ -25,7 +25,13 @@
                         tag="h3"
                         class="mb-2"
                 >
-                    <b-button href="#" variant="primary">Go somewhere</b-button>
+                    <template v-slot:footer>
+                        <b-card-text class="small d-flex justify-content-sm-between">
+                            <b-icon v-b-tooltip.hover title="View" icon="person-check" role="button"></b-icon>
+                            <b-icon v-b-tooltip.hover title="Edit" icon="pencil-square" role="button"></b-icon>
+                            <b-icon v-b-tooltip.hover title="Delete" icon="x" role="button"></b-icon>
+                        </b-card-text>
+                    </template>
                 </b-card>
             </b-card-group>
 
@@ -54,6 +60,7 @@
         },
       },
     },
+
     data() {
       return {
         fieldsToShow: ['first_name', 'last_name', 'email'],
