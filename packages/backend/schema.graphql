@@ -26,7 +26,7 @@ type Mutation {
 
 type Query {
   user(id: Int!): User!
-  users(page: Int!): [User!]!
+  users(page: Int!): Users!
 }
 
 type Token {
@@ -38,4 +38,10 @@ type User {
   first_name: String!
   id: Int!
   last_name: String!
+}
+
+type Users {
+  page: Int!
+  total_pages: Int!
+  users: [User!]!
 }

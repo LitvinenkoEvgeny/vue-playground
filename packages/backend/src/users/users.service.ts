@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import fetch from 'node-fetch';
 
-import { CreateUserInput } from './users.model';
+import { CreateUserInput, Users } from './users.model';
 
 @Injectable()
 export class UsersService {
-  public async getAllUsers(page: number) {
-    const users = await (await fetch(`https://reqres.in/api/users?page=${page}`)).json();
-    return users.data;
+  public async getAllUsers(page: number): Promise<Users> {
+    const { page: page_num, total_pages, data } = await (await fetch(`https://reqres.in/api/users?page=${page}`)).json();
+    return { page: page_num, total_pages, users: data };
   }
 
   public async getUser(id: number) {

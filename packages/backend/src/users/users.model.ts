@@ -1,6 +1,18 @@
 import { Field, ID, InputType, Int, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
+export class Users {
+  @Field(type => Int)
+  page: number;
+
+  @Field(type => Int)
+  total_pages: number;
+
+  @Field(type => [User])
+  users: User[];
+}
+
+@ObjectType()
 export class User {
   @Field(type => Int)
   id: number;
@@ -27,7 +39,7 @@ export class CreatedUser {
   id: number;
 
   @Field(type => String)
-  createdAt: string
+  createdAt: string;
 }
 
 @InputType()
