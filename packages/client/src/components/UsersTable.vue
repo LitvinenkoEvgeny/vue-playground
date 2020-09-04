@@ -29,7 +29,8 @@
                         <b-card-text class="small d-flex justify-content-sm-between">
                             <b-icon v-b-tooltip.hover title="View" icon="person-check" role="button"></b-icon>
                             <b-icon v-b-tooltip.hover title="Edit" icon="pencil-square" role="button"></b-icon>
-                            <b-icon v-b-tooltip.hover title="Delete" icon="x" role="button"></b-icon>
+                            <b-icon @click="handleRemove(user)" v-b-tooltip.hover title="Delete" icon="x"
+                                    role="button"></b-icon>
                         </b-card-text>
                     </template>
                 </b-card>
@@ -42,6 +43,7 @@
 
 <script>
   import USERS_QUERY from '../graphql/users.graphql';
+  import DELETE_USER_MUTATION from '../graphql/delete.graphql';
 
   export default {
     apollo: {
@@ -72,6 +74,19 @@
 
     methods: {
       handleSelect() {
+      },
+
+      async handleRemove(user) {
+
+        user;
+        await this.$apollo.mutate({
+          mutation: DELETE_USER_MUTATION,
+          variables: {
+            id: user.id,
+          },
+        });
+
+        await this.$apollo.queries.getUsers.refetch();
       },
     },
   };
