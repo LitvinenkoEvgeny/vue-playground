@@ -25,6 +25,9 @@ export class User {
 
   @Field(type => String)
   last_name: string;
+
+  @Field(type => String)
+  avatar: string
 }
 
 @ObjectType()
