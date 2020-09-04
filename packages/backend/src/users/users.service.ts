@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import fetch from 'node-fetch';
 
 import { CreateUserInput, Users } from './users.model';
@@ -12,6 +12,11 @@ export class UsersService {
 
   public async getUser(id: number) {
     const user = await (await fetch(`https://reqres.in/api/users/${id}`)).json();
+
+    if (!user.data) {
+      throw new NotFoundException(`wrong user id: ${id}`);
+    }
+
     return user.data;
   }
 
@@ -41,6 +46,6 @@ export class UsersService {
     }));
 
     // return deleted user
-    return this.getUser(id)
+    return this.getUser(id);
   }
 }
