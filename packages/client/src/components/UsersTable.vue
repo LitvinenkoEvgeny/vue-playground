@@ -27,8 +27,8 @@
                 >
                     <template v-slot:footer>
                         <b-card-text class="small d-flex justify-content-sm-between">
-                            <b-icon v-b-tooltip.hover title="View" icon="person-check" role="button"></b-icon>
-                            <b-icon v-b-tooltip.hover title="Edit" icon="pencil-square" role="button"></b-icon>
+                            <b-icon @click="handleSelect(user)"  v-b-tooltip.hover title="View" icon="person-check" role="button"></b-icon>
+                            <b-icon @click="handleEdit(user)" v-b-tooltip.hover title="Edit" icon="pencil-square" role="button"></b-icon>
                             <b-icon @click="handleRemove(user)" v-b-tooltip.hover title="Delete" icon="x"
                                     role="button"></b-icon>
                         </b-card-text>
@@ -73,12 +73,16 @@
     },
 
     methods: {
-      handleSelect() {
+      handleEdit(user) {
+        this.$router.push({name: 'edit', params: {id: user.id}})
+      },
+
+      handleSelect(user) {
+        this.$router.push({name: 'view', params: {id: user.id}})
       },
 
       async handleRemove(user) {
 
-        user;
         await this.$apollo.mutate({
           mutation: DELETE_USER_MUTATION,
           variables: {

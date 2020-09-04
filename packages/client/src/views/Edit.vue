@@ -1,16 +1,16 @@
 <template>
-    <User :id="id"></User>
+    <EditUser :id="id"></EditUser>
 </template>
 
 <script>
   // @ is an alias to /src
-  import User from '@/components/User';
+  import EditUser from '@/components/User.edit';
 
   export default {
-    name: 'UserInfo',
+    name: 'Edit',
     props: ['id'],
     components: {
-      User
-    }
+      EditUser,
+    },
   };
 </script>

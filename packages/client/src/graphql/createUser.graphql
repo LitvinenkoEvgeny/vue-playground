@@ -1,0 +1,10 @@
+mutation createUser($payload: CreateUserInput!){
+    createUser(userData: $payload){
+        avatar
+        createdAt
+        email
+        first_name
+        id
+        last_name
+    }
+}
