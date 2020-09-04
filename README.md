@@ -1,1 +1,1 @@
-`yarn install && lerna link && lerna bootstrap && lerna run start`
+`yarn install && lerna link && lerna bootstrap && lerna run start --stream`
