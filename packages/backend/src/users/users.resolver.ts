@@ -1,6 +1,6 @@
-import { Query, Resolver, Args, Mutation, Int } from '@nestjs/graphql';
+import { Query, Resolver, Args, Mutation, Int, ID } from '@nestjs/graphql';
 
-import { CreatedUser, CreateUserInput, DeleteUserInput, User, Users } from './users.model';
+import { CreatedUser, CreateUserInput, User, Users } from './users.model';
 import { UsersService } from './users.service.js';
 import { UseGuards } from '@nestjs/common';
 import { AuthGuard } from '../auth/auth.guard';
@@ -28,8 +28,8 @@ export class UsersResolver {
   }
 
   @Mutation(returns => User)
-  async deleteUser(@Args('deleteUserData') deleteUserData: DeleteUserInput){
-    return this.usersService.deleteUser(deleteUserData);
+  async deleteUser(@Args('deleteUserData', {type: () => ID}) id: number){
+    return this.usersService.deleteUser(id);
   }
 
 }

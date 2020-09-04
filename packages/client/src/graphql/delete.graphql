@@ -1,0 +1,5 @@
+mutation DeleteUser($id: ID!){
+    deleteUser(deleteUserData: $id){
+        first_name
+    }
+}

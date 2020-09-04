@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import fetch from 'node-fetch';
 
-import { CreateUserInput, DeleteUserInput, Users } from './users.model';
+import { CreateUserInput, Users } from './users.model';
 
 @Injectable()
 export class UsersService {
@@ -31,9 +31,9 @@ export class UsersService {
     }
   }
 
-  public async deleteUser(deleteUserPayload: DeleteUserInput) {
+  public async deleteUser(id: number) {
 
-    await (fetch(`https://regres.in/api/users/${deleteUserPayload.id}`, {
+    await (fetch(`https://regres.in/api/users/${id}`, {
       method: 'delete',
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
@@ -41,6 +41,6 @@ export class UsersService {
     }));
 
     // return deleted user
-    return this.getUser(deleteUserPayload.id)
+    return this.getUser(id)
   }
 }
