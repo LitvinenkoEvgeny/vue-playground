@@ -1,9 +1,36 @@
 <template>
-    <b-row>
-        <div v-if="$apollo.queries.getUsers.loading">Loading</div>
-        <b-table striped hover :items="users"></b-table>
-        <b-button v-if="!$apollo.queries.getUsers.loading" @click="prevPage">prev page</b-button>
-        <b-button v-if="!$apollo.queries.getUsers.loading" @click="nextPage">next page</b-button>
+    <b-row align-h="center" align-v="center">
+        <b-icon v-if="$apollo.queries.getUsers.loading" icon="arrow-clockwise" animation="spin-pulse"
+                font-scale="4"></b-icon>
+
+
+        <b-col md="12" v-if="!$apollo.queries.getUsers.loading">
+
+            <b-pagination
+                    v-model="page"
+                    :total-rows="totalPages"
+                    :per-page="1"
+                    aria-controls="my-table"
+                    class="align-self-center"
+            ></b-pagination>
+
+            <b-card-group columns>
+                <b-card
+                        v-for="user in users"
+                        :key="user.id"
+                        :title="user.first_name + ' ' + user.last_name"
+                        :img-src="user.image"
+                        img-alt="User image"
+                        img-top
+                        tag="h3"
+                        class="mb-2"
+                >
+                    <b-button href="#" variant="primary">Go somewhere</b-button>
+                </b-card>
+            </b-card-group>
+
+
+        </b-col>
     </b-row>
 </template>
 
@@ -21,28 +48,24 @@
           };
         },
 
-        update(data){
-          this.users = data.users
-        }
+        update(data) {
+          this.totalPages = data.users.total_pages;
+          this.users = data.users.users;
+        },
       },
     },
     data() {
       return {
+        fieldsToShow: ['first_name', 'last_name', 'email'],
         page: 1,
-        users: []
+        totalPages: null,
+        users: [],
       };
     },
 
     methods: {
-      prevPage(){
-        if(this.page - 1 !== 0){
-          this.page = this.page - 1;
-        }
+      handleSelect() {
       },
-
-      nextPage(){
-        this.page = this.page + 1;
-      }
-    }
+    },
   };
 </script>

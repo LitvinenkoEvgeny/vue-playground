@@ -1,7 +1,13 @@
 query GetUsers($page: Int!) {
     users(page: $page){
-        first_name
-        email
-        last_name
+        page
+        total_pages
+        users {
+            id
+            first_name
+            email
+            last_name
+            image: avatar
+        }
     }
 }

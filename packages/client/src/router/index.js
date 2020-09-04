@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
+import UserInfo from '../views/UserInfo';
 import Login from '../views/Login.vue';
 
 import { isLoggedIn } from '../vue-apollo';
@@ -26,6 +27,11 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
+  },
+  {
+    path: '/:id',
+    name: 'user',
+    component: UserInfo,
   },
   { path: '/login', name: 'Login', component: Login },
   {
