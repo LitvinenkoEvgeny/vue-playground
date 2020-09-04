@@ -1,15 +1,21 @@
 <template>
     <div id="app">
+        <navbar></navbar>
+
         <b-container>
-            <b-nav>
-                <b-nav-item>
-                    <router-link to="/">Home</router-link>
-                </b-nav-item>
-                <b-nav-item>
-                    <router-link to="/about">About</router-link>
-                </b-nav-item>
-            </b-nav>
             <router-view/>
         </b-container>
     </div>
 </template>
+
+<script>
+  // @ is an alias to /src
+  import navbar from '@/components/navbar';
+
+  export default {
+    name: 'App',
+    components: {
+      navbar,
+    },
+  };
+</script>
