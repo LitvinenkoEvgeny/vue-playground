@@ -53,3 +53,9 @@ export class CreateUserInput {
   @Field()
   job: string;
 }
+
+@InputType()
+export class DeleteUserInput {
+  @Field(type => ID)
+  id: number;
+}

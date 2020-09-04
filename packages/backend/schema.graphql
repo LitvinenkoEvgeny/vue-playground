@@ -14,6 +14,10 @@ input CreateUserInput {
   name: String!
 }
 
+input DeleteUserInput {
+  id: ID!
+}
+
 input LoginInput {
   email: String!
   password: String!
@@ -21,6 +25,7 @@ input LoginInput {
 
 type Mutation {
   createUser(userData: CreateUserInput!): CreatedUser!
+  deleteUser(deleteUserData: DeleteUserInput!): User!
   login(userData: LoginInput!): Token!
 }
 
